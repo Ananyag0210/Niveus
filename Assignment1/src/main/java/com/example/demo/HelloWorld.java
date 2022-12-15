@@ -11,4 +11,12 @@ public class HelloWorld {
 	 {
 		 return "Hello World!!";
 	 }
+	 
+
+	 @GetMapping("/getData")
+	 public String getGreeting()
+	 {
+		 return "Hava a good data";
+	 }
+	 
 }
