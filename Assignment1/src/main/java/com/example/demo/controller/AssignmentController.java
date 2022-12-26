@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dto.StudentDTO;
 import com.example.demo.entity.Student;
 import com.example.demo.service.AssignmentService;
 
@@ -35,7 +36,7 @@ public class AssignmentController {
 	}  
 	
 	@DeleteMapping("/delete_student")  
-	private String deleteBook(@RequestParam("studentId") Long studentId)   
+	private StudentDTO deleteBook(@RequestParam("studentId") Long studentId)   
 	{  
 		try {
 			 return	assignmentService.deletestudent(studentId);	
@@ -47,7 +48,7 @@ public class AssignmentController {
 	}  
 	
 	@PostMapping("/add_student")  
-	private String addStudent(@RequestBody Student students)   
+	private StudentDTO addStudent(@RequestBody Student students)   
 	{  
 		try {
 				return assignmentService.addStudent(students);	 
@@ -61,7 +62,7 @@ public class AssignmentController {
 	
 	
 	@PutMapping("/update_student")  
-	private String update(@RequestBody Student students)   
+	private StudentDTO update(@RequestBody Student students)   
 	{  
 		try {
 			return assignmentService.updateStudent(students); 
