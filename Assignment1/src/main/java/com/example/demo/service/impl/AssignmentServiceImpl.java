@@ -48,7 +48,6 @@ public class AssignmentServiceImpl implements AssignmentService{
 				studentData.setId(student.getId());
 				studentData.setStudent(student.getStudent());
 				studentData.setBranch(student.getBranch());
-			
 				Student students = studentRepository.save(studentData); 
 				
 				return new ServiceResponse<>(HttpStatus.CREATED,"Update successfully", student);
@@ -61,20 +60,45 @@ public class AssignmentServiceImpl implements AssignmentService{
 	
 	
 	@Override
-	public ServiceResponse<List<StudentDTO>> getStudent() {
+	public ServiceResponse<List<StudentDTO>> getStudentByType(String type,String name){
 		try {
 
 			List<StudentDTO> students = new ArrayList<>();  
-			studentRepository.findAll().forEach((studentsData) -> {
-
-			StudentDTO studentDTO = new StudentDTO();
-			studentDTO.setId(studentsData.getId());
-			studentDTO.setBranch(studentsData.getBranch());
-			studentDTO.setStudent(studentsData.getStudent());
-			students.add(studentDTO);
-			});
-			return new ServiceResponse<>(HttpStatus.OK,"Student Details", students);
+			
+//			studentRepository.findAll().forEach((studentsData) -> {
+			//StudentDTO studentDTO = new StudentDTO();
+//			studentDTO.setId(studentsData.getId());
+//			studentDTO.setBranch(studentsData.getBranch());
+//			studentDTO.setStudent(studentsData.getStudent());
+			//System.out.println("GET STUDENT BY TYPE | STUDENT ID | "+studentsData.getId()+ " | STUDENT NAME | "+studentsData.getStudent()+" | STUDENT BRANCH | "+studentsData.getBranch());	
+//			});
+//			return new ServiceResponse<>(HttpStatus.OK,"Student Details", students);
+//				
+			
+			if(type.equalsIgnoreCase("STUDENT"))
+			{
+				studentRepository.findByStudentContainingIgnoreCase(name).forEach((studentsData) -> 
+				{
+					StudentDTO studentDTO = new StudentDTO();
+					studentDTO.setId(studentsData.getId());
+					studentDTO.setBranch(studentsData.getBranch());
+					studentDTO.setStudent(studentsData.getStudent());
+					students.add(studentDTO);
+				});
 				
+			}
+			else if(type.equalsIgnoreCase("BRANCH"))
+			{
+				studentRepository.findByBranchContainingIgnoreCase(name).forEach((studentsData) ->
+				{
+					StudentDTO studentDTO = new StudentDTO();
+					studentDTO.setId(studentsData.getId());
+					studentDTO.setBranch(studentsData.getBranch());
+					studentDTO.setStudent(studentsData.getStudent());
+					students.add(studentDTO);
+				});
+			}
+			return new ServiceResponse<>(HttpStatus.OK,"Students Detail", students);
 		} 
 		catch (Exception e) {
 			System.out.println("GET STUDENT | EXCEPTION FOUND | "+ e.getMessage());
@@ -94,9 +118,7 @@ public class AssignmentServiceImpl implements AssignmentService{
 					studentDTO.setId(students.getId());
 					studentDTO.setBranch(students.getBranch());
 					studentDTO.setStudent(students.getStudent());
-					
 					studentRepository.deleteById(id);
-					
 					return new ServiceResponse<>(HttpStatus.OK,"Student Deleted Successfully", studentDTO);
 				}
 				else

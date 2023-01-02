@@ -14,7 +14,7 @@ public interface AssignmentService {
 	public ServiceResponse<StudentDTO> updateStudent(StudentDTO student);
 	
 	public ServiceResponse<StudentDTO> deleteStudent(Long id);
-	public ServiceResponse<List<StudentDTO>> getStudent();
+	public ServiceResponse<List<StudentDTO>> getStudentByType(String type,String name);
 	
 	
 }

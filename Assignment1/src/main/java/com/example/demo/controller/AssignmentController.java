@@ -27,11 +27,11 @@ public class AssignmentController {
 	AssignmentService assignmentService;  
 	
 	@GetMapping("/getStudent")  
-	private ResponseEntity<Response> getStudent()   
+	private ResponseEntity<Response> getStudent(@RequestParam("type")String type,@RequestParam("name")String name)   
 	{  
 		try {
 				Response response;
-				ServiceResponse<List<StudentDTO>> serivceResponse = assignmentService.getStudent();
+				ServiceResponse<List<StudentDTO>> serivceResponse = assignmentService.getStudentByType(type,name);
 				
 				if(serivceResponse.getStatus() == HttpStatus.OK)
 				{
