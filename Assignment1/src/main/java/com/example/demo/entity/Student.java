@@ -17,7 +17,7 @@ public class Student {
 	private long id;
 	
 	@Column(name = "stu_name")
-	private String student;
+	private String studentName;
 	
 	@Column(name = "branch_name")
 	private String branch;
@@ -30,12 +30,12 @@ public class Student {
 		this.id = id;
 	}
 
-	public String getStudent() {
-		return student;
+	public String getStudentName() {
+		return studentName;
 	}
 
-	public void setStudent(String student) {
-		this.student = student;
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
 	}
 
 	public String getBranch() {
@@ -48,8 +48,9 @@ public class Student {
 
 	@Override
 	public String toString() {
-		return "Student [id=" + id + ", student=" + student + ", branch=" + branch + "]";
+		return "Student [id=" + id + ", studentName=" + studentName + ", branch=" + branch + "]";
 	}
+
 	
 	
 

@@ -23,14 +23,14 @@ public class AssignmentServiceImpl implements AssignmentService{
 	public ServiceResponse<StudentDTO> addStudent(StudentDTO student) {
 		try {
 				Student studentData = new Student();
-				studentData.setStudent(student.getStudent());
+				studentData.setStudentName(student.getStudentName());
 				studentData.setBranch(student.getBranch());
 				
 				Student students = studentRepository.save(studentData);  
 				
 				student.setId(students.getId());
 				student.setBranch(students.getBranch());
-				student.setStudent(students.getStudent());
+				student.setStudentName(students.getStudentName());
 				return new ServiceResponse<>(HttpStatus.CREATED,"Added successfully", student);
 			
 		} catch (Exception e) {
@@ -46,9 +46,9 @@ public class AssignmentServiceImpl implements AssignmentService{
 		try {
 				Student studentData = new Student();
 				studentData.setId(student.getId());
-				studentData.setStudent(student.getStudent());
+				studentData.setStudentName(student.getStudentName());
 				studentData.setBranch(student.getBranch());
-				Student students = studentRepository.save(studentData); 
+				studentRepository.save(studentData); 
 				
 				return new ServiceResponse<>(HttpStatus.CREATED,"Update successfully", student);
 			
@@ -66,35 +66,35 @@ public class AssignmentServiceImpl implements AssignmentService{
 			List<StudentDTO> students = new ArrayList<>();  
 			
 //			studentRepository.findAll().forEach((studentsData) -> {
-			//StudentDTO studentDTO = new StudentDTO();
+//			StudentDTO studentDTO = new StudentDTO();
 //			studentDTO.setId(studentsData.getId());
 //			studentDTO.setBranch(studentsData.getBranch());
 //			studentDTO.setStudent(studentsData.getStudent());
-			//System.out.println("GET STUDENT BY TYPE | STUDENT ID | "+studentsData.getId()+ " | STUDENT NAME | "+studentsData.getStudent()+" | STUDENT BRANCH | "+studentsData.getBranch());	
+//			System.out.println("GET STUDENT BY TYPE | STUDENT ID | "+studentsData.getId()+ " | STUDENT NAME | "+studentsData.getStudent()+" | STUDENT BRANCH | "+studentsData.getBranch());	
 //			});
 //			return new ServiceResponse<>(HttpStatus.OK,"Student Details", students);
-//				
+				
 			
 			if(type.equalsIgnoreCase("STUDENT"))
 			{
-				studentRepository.findByStudentContainingIgnoreCase(name).forEach((studentsData) -> 
+				studentRepository.findByStudentContainingIgnoreCase(name).forEach(studentsData -> 
 				{
 					StudentDTO studentDTO = new StudentDTO();
 					studentDTO.setId(studentsData.getId());
 					studentDTO.setBranch(studentsData.getBranch());
-					studentDTO.setStudent(studentsData.getStudent());
+					studentDTO.setStudentName(studentsData.getStudentName());
 					students.add(studentDTO);
 				});
 				
 			}
 			else if(type.equalsIgnoreCase("BRANCH"))
 			{
-				studentRepository.findByBranchContainingIgnoreCase(name).forEach((studentsData) ->
+				studentRepository.findByBranchContainingIgnoreCase(name).forEach(studentsData ->
 				{
 					StudentDTO studentDTO = new StudentDTO();
 					studentDTO.setId(studentsData.getId());
 					studentDTO.setBranch(studentsData.getBranch());
-					studentDTO.setStudent(studentsData.getStudent());
+					studentDTO.setStudentName(studentsData.getStudentName());
 					students.add(studentDTO);
 				});
 			}
@@ -117,7 +117,7 @@ public class AssignmentServiceImpl implements AssignmentService{
 				{
 					studentDTO.setId(students.getId());
 					studentDTO.setBranch(students.getBranch());
-					studentDTO.setStudent(students.getStudent());
+					studentDTO.setStudentName(students.getStudentName());
 					studentRepository.deleteById(id);
 					return new ServiceResponse<>(HttpStatus.OK,"Student Deleted Successfully", studentDTO);
 				}

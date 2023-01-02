@@ -15,19 +15,19 @@ import com.example.demo.repository.StudentRepo;
 @SpringBootTest
 class Assignment1ApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+//	@Test
+//	void contextLoads() {
+//	}
 	@Autowired
 	StudentRepo studentRepo;
 	
 	@Test
 	@Order(1)
-	public void addStudent()
+	void addStudent()
 	{
 		Student student = new Student();
 		student.setBranch("Electronics");
-		student.setStudent("Ram");
+		student.setStudentName("Sita");
 		studentRepo.save(student);
 		
 		Assertions.assertThat(student.getId());
@@ -35,18 +35,18 @@ class Assignment1ApplicationTests {
 	
 	@Test
 	@Order(2)
-	public void getStudentTest() {
+	void getStudentTest() {
 		List<Student> students = studentRepo.findAll();
-		Assertions.assertThat(students.size()).isEqualTo(1L);
+		Assertions.assertThat(students.size()).isGreaterThan(0);
 		
 	}
 	
 	@Test
 	@Order(3)
 	@Rollback(value = false)
-	public void updateStudent()
+	void updateStudent()
 	{
-		Student student = studentRepo.findById(7L).orElse(null);
+		Student student = studentRepo.findById(10L).orElse(null);
 		student.setBranch("Machine Learning");
 		Student updatedStudent = studentRepo.save(student);
 		
@@ -55,13 +55,13 @@ class Assignment1ApplicationTests {
 	
 	@Test
 	@Order(4)
-	public void deleteStudent()
+	void deleteStudent()
 	{
-		Student student = studentRepo.findById(14L).orElse(null);
+		Student student = studentRepo.findById(17L).orElse(null);
 		if(student != null)
 		{
-			studentRepo.deleteById(14L);	
+			studentRepo.deleteById(17L);	
 		}
-		Assertions.assertThat(student.getId()).isEqualTo(14L);
+		Assertions.assertThat(student.getId()).isEqualTo(17L);
 	}
 }

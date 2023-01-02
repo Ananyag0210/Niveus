@@ -27,20 +27,18 @@ public class AssignmentController {
 	AssignmentService assignmentService;  
 	
 	@GetMapping("/getStudent")  
-	private ResponseEntity<Response> getStudent(@RequestParam("type")String type,@RequestParam("name")String name)   
+	public ResponseEntity<Response> getStudent(@RequestParam("type")String type,@RequestParam("name")String name)   
 	{  
 		try {
 				Response response;
-				ServiceResponse<List<StudentDTO>> serivceResponse = assignmentService.getStudentByType(type,name);
+				ServiceResponse<List<StudentDTO>> serviceResponse = assignmentService.getStudentByType(type,name);
 				
-				if(serivceResponse.getStatus() == HttpStatus.OK)
-				{
-					response = new Response(serivceResponse.getStatus(),serivceResponse.getMessage(),serivceResponse.getT());
-					return new ResponseEntity<>(response,serivceResponse.getStatus());
-				}
-				else {
-					response = new Response(serivceResponse.getStatus(),serivceResponse.getMessage(),serivceResponse.getT());
-					return new ResponseEntity<>(response,serivceResponse.getStatus());
+				if(serviceResponse.getStatus() == HttpStatus.OK){
+					response = new Response(serviceResponse.getStatus(),serviceResponse.getMessage(),serviceResponse.getT());
+					return new ResponseEntity<>(response,serviceResponse.getStatus());
+				} else {
+					response = new Response(serviceResponse.getStatus(),serviceResponse.getMessage(),serviceResponse.getT());
+					return new ResponseEntity<>(response,serviceResponse.getStatus());
 				}
 		} 
 		catch (Exception e) {
@@ -50,20 +48,18 @@ public class AssignmentController {
 	}  
 	
 	@DeleteMapping("/deleteStudent")  
-	private ResponseEntity<Response> deleteBook(@RequestParam("studentId") Long studentId)   
+	public ResponseEntity<Response> deleteBook(@RequestParam("studentId") Long studentId)   
 	{  
 		try {
 				Response response;
-				ServiceResponse<StudentDTO> serivceResponse = assignmentService.deleteStudent(studentId);	
+				ServiceResponse<StudentDTO> serviceResponse = assignmentService.deleteStudent(studentId);	
 				
-				if(serivceResponse.getStatus() == HttpStatus.OK)
-				{
-					response = new Response(serivceResponse.getStatus(),serivceResponse.getMessage(),serivceResponse.getT());
-					return new ResponseEntity<>(response,serivceResponse.getStatus());
-				}
-				else {
-					response = new Response(serivceResponse.getStatus(),serivceResponse.getMessage(),serivceResponse.getT());
-					return new ResponseEntity<>(response,serivceResponse.getStatus());
+				if(serviceResponse.getStatus() == HttpStatus.OK){
+					response = new Response(serviceResponse.getStatus(),serviceResponse.getMessage(),serviceResponse.getT());
+					return new ResponseEntity<>(response,serviceResponse.getStatus());
+				} else {
+					response = new Response(serviceResponse.getStatus(),serviceResponse.getMessage(),serviceResponse.getT());
+					return new ResponseEntity<>(response,serviceResponse.getStatus());
 				}
 				
 		} catch (Exception e) {
@@ -74,19 +70,17 @@ public class AssignmentController {
 	}  
 	
 	@PostMapping("/addStudent")  
-	private ResponseEntity<Response> addStudent(@RequestBody StudentDTO students)   
+	public ResponseEntity<Response> addStudent(@RequestBody StudentDTO students)   
 	{  
 		try {
 				Response response;
-				ServiceResponse<StudentDTO> serivceResponse = assignmentService.addStudent(students);	 
-				if(serivceResponse.getStatus() == HttpStatus.CREATED)
-				{
-					response = new Response(serivceResponse.getStatus(),serivceResponse.getMessage(),serivceResponse.getT());
-					return new ResponseEntity<>(response,serivceResponse.getStatus());
-				}
-				else {
-					response = new Response(serivceResponse.getStatus(),serivceResponse.getMessage(),serivceResponse.getT());
-					return new ResponseEntity<>(response,serivceResponse.getStatus());
+				ServiceResponse<StudentDTO> serviceResponse = assignmentService.addStudent(students);	 
+				if(serviceResponse.getStatus() == HttpStatus.CREATED){
+					response = new Response(serviceResponse.getStatus(),serviceResponse.getMessage(),serviceResponse.getT());
+					return new ResponseEntity<>(response,serviceResponse.getStatus());
+				} else {
+					response = new Response(serviceResponse.getStatus(),serviceResponse.getMessage(),serviceResponse.getT());
+					return new ResponseEntity<>(response,serviceResponse.getStatus());
 				}
 				
 		} catch (Exception e) {
@@ -98,19 +92,17 @@ public class AssignmentController {
 	
 	
 	@PutMapping("/updateStudent")  
-	private ResponseEntity<Response> update(@RequestBody StudentDTO students)   
+	public ResponseEntity<Response> update(@RequestBody StudentDTO students)   
 	{  
 		try {
 				Response response;
-				ServiceResponse<StudentDTO> serivceResponse = assignmentService.updateStudent(students); 
-				if(serivceResponse.getStatus() == HttpStatus.OK)
-				{
-					response = new Response(serivceResponse.getStatus(),serivceResponse.getMessage(),serivceResponse.getT());
-					return new ResponseEntity<>(response,serivceResponse.getStatus());
-				}
-				else {
-					response = new Response(serivceResponse.getStatus(),serivceResponse.getMessage(),serivceResponse.getT());
-					return new ResponseEntity<>(response,serivceResponse.getStatus());
+				ServiceResponse<StudentDTO> serviceResponse = assignmentService.updateStudent(students); 
+				if(serviceResponse.getStatus() == HttpStatus.OK) {
+					response = new Response(serviceResponse.getStatus(),serviceResponse.getMessage(),serviceResponse.getT());
+					return new ResponseEntity<>(response,serviceResponse.getStatus());
+				} else {
+					response = new Response(serviceResponse.getStatus(),serviceResponse.getMessage(),serviceResponse.getT());
+					return new ResponseEntity<>(response,serviceResponse.getStatus());
 				}
 				
 		} catch (Exception e) {

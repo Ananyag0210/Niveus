@@ -3,7 +3,7 @@ package com.example.demo.dto;
 public class StudentDTO {
 	
 	private long id;
-	private String student;
+	private String studentName;
 	private String branch;
 	
 	public long getId() {
@@ -12,11 +12,11 @@ public class StudentDTO {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getStudent() {
-		return student;
+	public String getStudentName() {
+		return studentName;
 	}
-	public void setStudent(String student) {
-		this.student = student;
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
 	}
 	public String getBranch() {
 		return branch;
@@ -24,12 +24,11 @@ public class StudentDTO {
 	public void setBranch(String branch) {
 		this.branch = branch;
 	}
-	
 	@Override
 	public String toString() {
-		return "StudentDTO [id=" + id + ", student=" + student + ", branch=" + branch + "]";
+		return "StudentDTO [id=" + id + ", studentName=" + studentName + ", branch=" + branch + "]";
 	}
 	
-	
+
 
 }
